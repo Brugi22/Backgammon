@@ -1,0 +1,263 @@
+%------------------------------------------------------
+%
+%   Mijenjati po potrebi, i to u vlastitom predavanju!
+%
+%   Za promjene u samom predlošku,
+%   konzultirajte osobu zaduženu za održavanje.
+%
+%------------------------------------------------------
+
+\documentclass[crop=false, class = scrartcl]{standalone}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[croatian]{babel}
+
+ 
+\usepackage{csquotes} % za prave navodnike
+
+\usepackage{subfiles} % da mogu različiti fileovi funkcionirat
+\usepackage{amsmath, amssymb, amsthm} % hrpa matematičkih formula/znakova
+\usepackage{enumitem} % formatiranje numeriranja
+
+\usepackage{graphicx} % za slike
+\graphicspath{ {./images/} }
+
+\usepackage[dvipsnames]{xcolor} % za bojanje
+%tikzpicture
+\usepackage{tikz}
+\usepackage{scalerel}
+\usepackage{pict2e}
+\usepackage{tkz-euclide}
+\usetikzlibrary{calc}
+% siunitx config
+\RequirePackage{siunitx}
+\sisetup{per-mode = symbol} % show m/s instead of ms^-1
+\sisetup{output-decimal-marker = {,}}
+\DeclareSIUnit\liter{\litre} % small L in litres
+\DeclareSIUnit\euro{\geneuro}
+\sisetup{output-decimal-marker = {,}}
+\usetikzlibrary{patterns,arrows.meta}
+\usetikzlibrary{shadows}
+\usetikzlibrary{external}
+\usetikzlibrary{intersections}
+\usetikzlibrary{angles}
+
+\usepackage{multirow} %
+\usepackage{multicol} % za formatiranje naslova
+
+\usepackage{fontawesome} % za ove unicode ikone
+
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry} % margine stranica
+
+%\usepackage{biblatex}
+%\addbibresource{literatura.bib}
+
+\setlength{\parindent}{0cm} % da se odlomci ne uvlače
+\pagenumbering{gobble} % za nenumeriranje
+\frenchspacing
+
+\definecolor{orange_mnm}{HTML}{F37021}
+\definecolor{grey_mnm}{HTML}{666666}
+
+%Formatiranje poglavlja i potpoglavlja
+\renewcommand*{\sectionformat}{\LARGE{\color{orange_mnm!80!}\thesection.}\enskip}
+\renewcommand*{\subsectionformat}{\large{\color{orange_mnm!80!}\thesubsection.}\enskip}
+\renewcommand*{\subsubsectionformat}{\large{\color{orange_mnm!80!}\thesubsubsection.}\enskip}
+
+%Bitno za formatiranje naslova!
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% TEOREMSKA OKRUZENJA:
+\usepackage[framemethod = tikz]{mdframed} % za namještanje theorem tip environmenata
+\usetikzlibrary{shadows}
+\usepackage{thmtools} % za lakše editanje theorem tip 
+
+\makeatletter
+\define@key{thmdef}{mdthm}[{}]{%
+\thmt@trytwice{\def\thmt@theoremdefiner{\mdtheorem[#1]}}{}}
+\makeatother
+
+\mdfdefinestyle{thmstyle}{
+linewidth = 1.5pt,
+linecolor = orange_mnm!90!,
+hidealllines = true,
+leftline = true,
+innerleftmargin = 3pt,
+innerrightmargin = 3pt,
+frametitleaboveskip = 5pt,
+frametitlebelowskip = 5pt,
+frametitlerule = false,
+frametitlebackgroundcolor = orange!5,
+frametitlefont = \sffamily\bfseries,
+shadow = true,
+shadowsize = 4pt,
+shadowcolor = black!5!
+}
+
+\declaretheoremstyle[
+  headfont=\normalfont\itshape,
+  spacebelow = 2pt,
+  spaceabove = 12pt
+]{italic}
+		
+\mdfdefinestyle{defstyle}{
+linewidth = 1.5pt,
+linecolor = RoyalBlue!90!green!,
+hidealllines = true,
+leftline = true,
+innerleftmargin = 3pt,
+innerrightmargin = 3pt,
+frametitleaboveskip = 5pt,
+frametitlebelowskip = 5pt,
+frametitlerule = false,
+frametitlebackgroundcolor = RoyalBlue!5,
+frametitlefont = \sffamily\bfseries,
+shadow = true,
+shadowsize = 4pt,
+shadowcolor = black!5!
+}
+
+\mdfdefinestyle{lemstyle}{
+linewidth = 1.5pt,
+linecolor = ForestGreen!90!black!,
+hidealllines = true,
+leftline = true,
+innerleftmargin = 3pt,
+innerrightmargin = 3pt,
+frametitleaboveskip = 5pt,
+frametitlebelowskip = 5pt,
+frametitlerule = false,
+frametitlebackgroundcolor = ForestGreen!5,
+frametitlefont = \sffamily\bfseries,
+shadow = true,
+shadowsize = 4pt,
+shadowcolor = black!5!
+}
+
+\mdfdefinestyle{napstyle}{
+linewidth = 1.5pt,
+linecolor = Plum!90!black!,
+hidealllines = true,
+leftline = true,
+innerleftmargin = 3pt,
+innerrightmargin = 3pt,
+frametitleaboveskip = 5pt,
+frametitlebelowskip = 5pt,
+frametitlerule = false,
+frametitlebackgroundcolor = Orchid!10,
+frametitlefont = \sffamily\bfseries,
+shadow = true,
+shadowsize = 4pt,
+shadowcolor = black!5!
+}
+
+\mdfdefinestyle{oprstyle}{
+linewidth = 1.5pt,
+linecolor = WildStrawberry!90!black!,
+hidealllines = true,
+leftline = true,
+innerleftmargin = 3pt,
+innerrightmargin = 3pt,
+frametitleaboveskip = 5pt,
+frametitlebelowskip = 5pt,
+frametitlerule = false,
+frametitlebackgroundcolor = Salmon!10,
+frametitlefont = \sffamily\bfseries,
+shadow = true,
+shadowsize = 4pt,
+shadowcolor = black!5!
+}
+
+\declaretheoremstyle[
+  headfont=\color{ForestGreen!80!black}\sffamily\bfseries,
+  spacebelow = 2pt,
+  spaceabove = 12pt
+]{primjersty}
+
+\declaretheoremstyle[
+  headfont=\color{RawSienna!60!red!}\sffamily\bfseries,
+  spacebelow = 6pt,
+  spaceabove = 6pt
+]{rjesenjesty}
+
+%\declaretheorem[mdthm = {style = thmstyle}, name = {{\bfseries\sffamily\color{orange_mnm!30!orange!} \faInfoCircle} Teorem}, numberwithin = section]{teorem}
+\declaretheorem[mdthm = {style = thmstyle}, name = {Teorem}, numberwithin = section]{teorem}
+%\declaretheorem[mdthm = {style = thmstyle}, name = {{\bfseries\sffamily\color{orange_mnm!30!orange!} \faInfoCircle} Propozicija}, sibling = teorem]{propozicija}
+\declaretheorem[mdthm = {style = thmstyle}, name = {Propozicija}, sibling = teorem]{propozicija}
+\declaretheorem[mdthm = {style = thmstyle}, name = {Poučak}, sibling = teorem]{poucak}
+%\declaretheorem[mdthm = {style = thmstyle}, name = {{\bfseries\sffamily\color{orange_mnm!30!orange!} \faInfoCircle} Korolar}, sibling = teorem]{korolar}
+\declaretheorem[mdthm = {style = thmstyle}, name = {Korolar}, sibling = teorem]{korolar}
+\declaretheorem[name = Dokaz, numbered = no, style = italic, qed = $\qedsymbol$]{dokaz}
+%\declaretheorem[name = {\bfseries\sffamily {\color{RoyalBlue!30!blue!} \faInfoCircle} Definicija}, mdthm = {style = defstyle}, sibling = teorem]{definicija}
+\declaretheorem[name = {Definicija}, mdthm = {style = defstyle}, sibling = teorem]{definicija}
+%\declaretheorem[name = {{\bfseries\sffamily\color{ForestGreen!30!green!} \faInfoCircle} Lema}, mdthm = {style = lemstyle}, sibling = teorem]{lema}
+\declaretheorem[name = {Lema}, mdthm = {style = lemstyle}, sibling = teorem]{lema}
+\declaretheorem[name = {Napomena}, mdthm = {style = napstyle}, sibling = teorem]{napomena}
+\declaretheorem[name = {{\bfseries\sffamily\color{WildStrawberry!90!black!} \faExclamationTriangle} Oprez}, mdthm = {style = oprstyle}]{oprez}
+
+\declaretheorem[name = Primjer, style = primjersty, parent = section]{primjer}
+\declaretheorem[name = Zadatak, style = primjersty, sharenumber = primjer]{zadatak}
+\declaretheorem[name = Rješenje, style = rjesenjesty, parent = section, qed = \qedsymbol]{rjesenje}
+
+%Postavke za linkove:
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=red,
+}
+
+\urlstyle{same}
+
+% NASLOV:
+\newcommand{\printtitle}[7]{
+    \sffamily 
+    \begin{figure}[h]
+        \begin{minipage}{.27\textwidth}
+            \vspace{0.63cm}
+            \begin{center}
+                \begin{tabular}{| C{1.5cm} | C{1.5cm} |}\hline
+                    \multirow{2}{*}{\Huge{#1}} & \footnotesize{#2}\\
+                    & \footnotesize{grupa} \\ \hline
+                \end{tabular}
+                \smallskip\footnotesize
+                
+                #3
+                
+                #4
+            \end{center}
+        \end{minipage}%
+        \begin{minipage}{.46\textwidth}
+            \begin{center}
+                \Large
+                \textbf{#5}\bigskip
+                
+                \large
+                #6\smallskip
+                
+                #7
+            \end{center}
+        \end{minipage}%
+        \begin{minipage}{.27\textwidth}
+            \begin{center}
+                \includegraphics[height=1.5cm]{images/mnm_logo.pdf}
+                
+                \footnotesize
+                
+                Mladi nadareni matematičari "Marin Getaldić"
+            \end{center}
+        \end{minipage}%
+    \end{figure}
+    
+    
+    %\vspace{-2mm}
+    \noindent\rule{\textwidth}{1pt}
+}
+
+\usepackage{biblatex}
+\addbibresource{literatura.bib}
